@@ -1,0 +1,27 @@
+{
+  "name": "storyspeech_bot",
+  "version": "1.0.0",
+  "description": "Telegram bot for vocalize articles from websites",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bot": "node index.js",
+    "autoreload": "supervisor index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/dimakozin/storyspeech_bot.git"
+  },
+  "keywords": [
+    "telegram"
+  ],
+  "author": "dimakozin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dimakozin/storyspeech_bot/issues"
+  },
+  "homepage": "https://github.com/dimakozin/storyspeech_bot#readme",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.56.0"
+  }
+}
