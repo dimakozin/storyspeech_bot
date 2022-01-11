@@ -11,11 +11,22 @@ const scenario = YAML.load(file)
 bot.on('message', (msg) => {
     const chatId = msg.chat.id;
     
-    let text = msg.text
-    let chatData = msg.chat
+    let messageText = msg.text
 
-    //console.log(msg)
+    let branch = null
+    if(scenario.endpoints[messageText])
+        branch = scenario.endpoints[messageText]
+    else if(scenario.endpoints['default'])
+        branch = scenario.endpoints['default']
+    else {
+        console.error('Not implemented default method')
+        return
+    }
 
-    bot.sendMessage(chatId, `${text}`)
-    console.log(scenario)
+    console.log(msg)
+
+    response = branch.text.join('\n')
+    bot.sendMessage(msg.chat.id, response)
+
+
 });

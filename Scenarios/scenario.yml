@@ -8,7 +8,10 @@ endpoints:
 
     /menu:
         text:
-        - 'Just for test'
+        - 'Bot menu:'
+        - '/start'
+        - '/menu'
+        - 'default'
 
     default:
         text:
