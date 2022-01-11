@@ -1,0 +1,15 @@
+version: '1.0'
+
+endpoints:
+    /start:
+        text:
+        - 'Storyspeech telegram bot'
+        - 'Send URL you need to convert audio message'
+
+    /menu:
+        text:
+        - 'Just for test'
+
+    default:
+        text:
+        - 'I dont know what you want, sorry. Maybe you need /menu ?'

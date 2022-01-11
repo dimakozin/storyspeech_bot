@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/dimakozin/storyspeech_bot#readme",
   "dependencies": {
-    "node-telegram-bot-api": "^0.56.0"
+    "js-yaml": "^4.1.0",
+    "node-telegram-bot-api": "^0.56.0",
+    "yaml": "2.0.0-10"
   }
 }
