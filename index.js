@@ -11,11 +11,14 @@ const file = fs.readFileSync(settings.scenario_file)
 
 const scenario = YAML.load(file)
 
+const StateMachine = require('./stateMachine')
+
 bot.on('message', (msg) => {
     const chatId = msg.chat.id;
     
     let messageText = msg.text
 
+    // set scenario branch
     let branch = null
     if(scenario.endpoints[messageText])
         branch = scenario.endpoints[messageText]
@@ -26,11 +29,10 @@ bot.on('message', (msg) => {
         return
     }
 
-    console.log(msg)
-
     response = branch.text.join('\n')
     let options = {}
 
+    // check reply markup keyboard
     if(!!branch.reply_markup){
         if(!!branch.reply_markup)
         {
@@ -50,7 +52,17 @@ bot.on('message', (msg) => {
         }
     }
 
+    if(!!branch.set_state & branch.set_state){
+        StateMachine.setState(chatId, messageText)
+    }
+
+    if(!!branch.drop_state & branch.drop_state){
+        StateMachine.dropState(chatId)
+    }
+
+
     bot.sendMessage(msg.chat.id, response, options)
 
+    console.log(StateMachine)
 
 });

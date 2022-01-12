@@ -3,21 +3,50 @@ version: '1.0'
 endpoints:
     /start:
         text:
-        - 'Storyspeech telegram bot'
-        - 'Send URL you need to convert audio message'
+        - '🌏 Отправь URL страницы, которую необходимо озвучить'
+        set_state: True
+        drop_state: False
+
+    /help:
+        text:
+        - "🤖 Storyspeech bot - бот для озвучивания статей с различных web-сайтов"
+        - "На текущий момент в разработке озвучка статей с TJ.ru"
         reply_markup:
             keyboard:
             - row:
-                - text: "/menu"
-                - text: "I dont know"
-                    
-    /menu:
-        text:
-        - 'Bot menu:'
-        - '/start'
-        - '/menu'
+                - text: "/start"
+        drop_state: True
 
     default:
         text:
-        - 'I dont know what you want, sorry'
-        - 'Maybe you need /menu 😏?'
+        - 'К сожалению, данная команда в боте не реализована'
+        - 'Список доступных команд можно получить по команде /help'
+        drop_state: True
+
+states:
+    none:
+        endpoints:
+            /start:
+            text:
+            - '🌏 Отправь URL страницы, которую необходимо озвучить'
+            set_state: True
+            set_state_name: "URL_ready"
+            drop_state: False
+
+            /help:
+                text:
+                - "🤖 Storyspeech bot - бот для озвучивания статей с различных web-сайтов"
+                - "На текущий момент в разработке озвучка статей с TJ.ru"
+                reply_markup:
+                    keyboard:
+                    - row:
+                        - text: "/start"
+                drop_state: True
+
+            default:
+                text:
+                - 'К сожалению, данная команда в боте не реализована'
+                - 'Список доступных команд можно получить по команде /help'
+                drop_state: True
+
+
