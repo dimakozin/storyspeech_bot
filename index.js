@@ -29,7 +29,28 @@ bot.on('message', (msg) => {
     console.log(msg)
 
     response = branch.text.join('\n')
-    bot.sendMessage(msg.chat.id, response)
+    let options = {}
+
+    if(!!branch.reply_markup){
+        if(!!branch.reply_markup)
+        {
+            options.reply_markup = {}
+            options.reply_markup.one_time_keyboard = true
+            options.reply_markup.resize_keyboard = true
+            options.reply_markup.keyboard = []
+
+            let rows = branch.reply_markup.keyboard
+            rows.forEach(row_object => {
+                let buttons = []
+                row_object.row.forEach(button => {
+                    buttons.push(button.text)
+                })
+                options.reply_markup.keyboard.push(buttons)
+            })
+        }
+    }
+
+    bot.sendMessage(msg.chat.id, response, options)
 
 
 });

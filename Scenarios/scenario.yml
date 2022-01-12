@@ -5,14 +5,19 @@ endpoints:
         text:
         - 'Storyspeech telegram bot'
         - 'Send URL you need to convert audio message'
-
+        reply_markup:
+            keyboard:
+            - row:
+                - text: "/menu"
+                - text: "I dont know"
+                    
     /menu:
         text:
         - 'Bot menu:'
         - '/start'
         - '/menu'
-        - 'default'
 
     default:
         text:
-        - 'I dont know what you want, sorry. Maybe you need /menu ?'
+        - 'I dont know what you want, sorry'
+        - 'Maybe you need /menu 😏?'
