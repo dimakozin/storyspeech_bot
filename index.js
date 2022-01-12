@@ -1,10 +1,13 @@
 const TelegramBot = require('node-telegram-bot-api');
-const token = '';
+
+const settings = require('./settings.json')
+
+const token = settings.token;
 const bot = new TelegramBot(token, {polling: true});
 
 const YAML = require('js-yaml');
 const fs = require('fs');
-const file = fs.readFileSync('./Scenarios/scenario.yml')
+const file = fs.readFileSync(settings.scenario_file)
 
 const scenario = YAML.load(file)
 
