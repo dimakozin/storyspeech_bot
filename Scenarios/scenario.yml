@@ -33,7 +33,7 @@ states:
                 - 'Переходы по шагам работают, красота.'
                 - 'Сейчас состояние будет просто сброшено'
                 - 'Нужно реализовать actions'
-                action:
-                - "someAction"
+                actions:
+                - "RepeatMessage"
                 drop_state: True
 

@@ -65,6 +65,9 @@ let getOptions = (branch) => {
     return options
 }
 
+const scenario_functions = require('./Scenarios/functions')
+
+
 bot.on('message', (msg) => {
     const chatId = msg.chat.id;
 
@@ -72,7 +75,15 @@ bot.on('message', (msg) => {
     let messageText = msg.text
 
     let branch = getBranch(state, messageText)
-    response = branch.text.join('\n')
+    let response = !!branch.text ? branch.text.join('\n') : null
+    let actions = !!branch.actions ? branch.actions : null
+
+    if(!!actions) 
+    {
+        actions.forEach(action => {
+            scenario_functions[action](bot, chatId, messageText);
+        })
+    }
 
     let options = getOptions(branch)
 
@@ -86,6 +97,6 @@ bot.on('message', (msg) => {
     }
 
     // send result message
-    bot.sendMessage(msg.chat.id, response, options)
+    if(!!response) bot.sendMessage(msg.chat.id, response, options)
 
 });
