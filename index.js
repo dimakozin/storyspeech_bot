@@ -13,16 +13,15 @@ const scenario = YAML.load(file)
 
 const StateMachine = require('./stateMachine')
 
-bot.on('message', (msg) => {
-    const chatId = msg.chat.id;
-
+let getChatState = (chatId) => {
     let chatState = StateMachine.getState(chatId)
     if(!!chatState) chatState = chatState.state
     else chatState = "none"
 
-    let state = scenario.states[chatState]
-    let messageText = msg.text
+    return chatState
+}
 
+let getBranch = (state, messageText) => {
     // set scenario branch
     let branch = null
     if(!!state.endpoints[messageText]) {
@@ -37,7 +36,10 @@ bot.on('message', (msg) => {
         return
     }
 
-    response = branch.text.join('\n')
+    return branch
+}
+
+let getOptions = (branch) => {
     let options = {}
 
     // check reply markup keyboard
@@ -59,6 +61,20 @@ bot.on('message', (msg) => {
             })
         }
     }
+
+    return options
+}
+
+bot.on('message', (msg) => {
+    const chatId = msg.chat.id;
+
+    let state = scenario.states[getChatState(chatId)]
+    let messageText = msg.text
+
+    let branch = getBranch(state, messageText)
+    response = branch.text.join('\n')
+
+    let options = getOptions(branch)
 
     // set/drop chat state
     if(!!branch.set_state & branch.set_state){
