@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bot": "node index.js",
-    "autoreload": "supervisor index.js"
+    "bot": "node --experimental-modules --experimental-json-modules index.mjs",
+    "autoreload": "nodemon --experimental-modules --experimental-json-modules index.mjs"
   },
   "repository": {
     "type": "git",
@@ -22,8 +22,20 @@
   },
   "homepage": "https://github.com/dimakozin/storyspeech_bot#readme",
   "dependencies": {
+    "axios": "^0.25.0",
     "js-yaml": "^4.1.0",
     "node-telegram-bot-api": "^0.56.0",
+    "tinkoff-voicekit": "^1.1.5",
+    "xpath": "^0.0.32",
     "yaml": "2.0.0-10"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
   }
 }
