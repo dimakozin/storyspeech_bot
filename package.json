@@ -26,6 +26,7 @@
     "js-yaml": "^4.1.0",
     "node-telegram-bot-api": "^0.56.0",
     "tinkoff-voicekit": "^1.1.5",
+    "xmldom": "^0.6.0",
     "xpath": "^0.0.32",
     "yaml": "2.0.0-10"
   },
