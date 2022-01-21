@@ -1,17 +1,18 @@
-const TelegramBot = require('node-telegram-bot-api');
+import * as settings from './settings.json'
 
-const settings = require('./settings.json')
+import TelegramBot from 'node-telegram-bot-api';
 
-const token = settings.token;
+const token = settings.default.token;
 const bot = new TelegramBot(token, {polling: true});
 
-const YAML = require('js-yaml');
-const fs = require('fs');
-const file = fs.readFileSync(settings.scenario_file)
+import YAML from 'js-yaml'
+import fs from 'fs'
+
+const file = fs.readFileSync(settings.default.scenario_file)
 
 const scenario = YAML.load(file)
 
-const StateMachine = require('./stateMachine')
+import StateMachine from './stateMachine.js'
 
 let getChatState = (chatId) => {
     let chatState = StateMachine.getState(chatId)
@@ -65,8 +66,7 @@ let getOptions = (branch) => {
     return options
 }
 
-const scenario_functions = require('./Scenarios/functions')
-
+import scenario_functions from './Scenarios/functions.mjs' 
 
 bot.on('message', (msg) => {
     const chatId = msg.chat.id;
@@ -95,8 +95,6 @@ bot.on('message', (msg) => {
     if(!!branch.drop_state & branch.drop_state){
         StateMachine.dropState(chatId)
     }
-
     // send result message
     if(!!response) bot.sendMessage(msg.chat.id, response, options)
-
 });
