@@ -2,6 +2,7 @@ import { TinkoffTextToSpeech } from 'tinkoff-voicekit'
 //const tts = new TinkoffTextToSpeech('issuer', 'subject', 'accessKeyId', 'secretAccessKey')
 
 import axios from 'axios'
+import xpath from 'xpath'
 
 export default {
     RepeatMessage: (bot, chatId, messageText) => {
@@ -10,12 +11,12 @@ export default {
 
         axios.get(messageText)
         .then( response => {
+            bot.sendMessage(chatId, 'Бот начал надиктовывать текст ☺ \n⌛ Нужно немножко подождать ')
             let text = response.data
-            console.log(text)
-            bot.sendMessage(chatId, 'Получено')
         })
         .catch (error => {
             bot.sendMessage(chatId, 'Произошла ошибка')
+            console.log(error)
         })
     }
 }
