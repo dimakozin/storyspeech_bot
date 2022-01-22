@@ -1,4 +1,4 @@
-import * as settings from './settings.json'
+import * as settings from './settings.json' assert {type: 'json'}
 
 import TelegramBot from 'node-telegram-bot-api';
 
