@@ -29,11 +29,7 @@ states:
     URL_ready:
         endpoints:
             default:
-                text:
-                - 'Переходы по шагам работают, красота.'
-                - 'Сейчас состояние будет просто сброшено'
-                - 'Нужно реализовать actions'
                 actions:
-                - "RepeatMessage"
+                - "ParseSite"
                 drop_state: True
 
