@@ -49,6 +49,11 @@ export default {
             })
         }
 
+        fs.readdir(pageAudioDir, (err, files) => {
+            files.forEach( file => {
+                bot.sendAudio(chatId, `${pageAudioDir}/${file}`)
+            })
+        })
 
     }
 
@@ -73,11 +78,12 @@ let parseData = (data) => {
 
     let mainTextNodes = xpath.select(TJ_XPath.mainText, doc) 
     let mainText = mainTextNodes.map( (item) => removeTags(item.toString()
-    .replaceAll("\n", '')
+    .replaceAll(/\s{2,10}/g, '')
     .replaceAll('   ', '')))
 
     mainText.splice(0,0,title)
-    return mainText.join(' ')
+
+    return mainText.join('. ')
 }
 
 let removeTags = (str) => {

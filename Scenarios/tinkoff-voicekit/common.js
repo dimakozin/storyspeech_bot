@@ -22,7 +22,8 @@ const ttsProto = grpcLibrary.loadPackageDefinition(packageDefinition).tinkoff.cl
 function createAuthCredentials(credentials) {
     const channelCredentials = grpcLibrary.credentials.createSsl();
     const callCredentials = grpcLibrary.credentials.createFromMetadataGenerator(
-        auth.jwtMetadataGenerator(credentials.apiKey, 
+        auth.jwtMetadataGenerator(
+            credentials.apiKey, 
             credentials.secretKey, 
             credentials.issuer, 
             credentials.subject
@@ -31,8 +32,8 @@ function createAuthCredentials(credentials) {
     return grpcLibrary.credentials.combineChannelCredentials(channelCredentials, callCredentials);
 }
 
-function createTtsClient() {
-    return new ttsProto.TextToSpeech("api.tinkoff.ai:443", createAuthCredentials());
+function createTtsClient(credentials) {
+    return new ttsProto.TextToSpeech("api.tinkoff.ai:443", createAuthCredentials(credentials));
 }
 
 
